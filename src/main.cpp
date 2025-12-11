@@ -170,5 +170,3 @@ public:
         FLAlertLayer::show();
     }
 };
-
-//end
