@@ -12,5 +12,6 @@
   "version": "v1.0.0",
   "developer": "Polik",
   "description": "",
-  "tags": ["utility", "enhancement"]
+  "tags": ["utility", "enhancement"],
+  "links": {"source": "https://github.com/PolikVirus/Delete-Lock"}
 }
