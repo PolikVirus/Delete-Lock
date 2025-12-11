@@ -3,7 +3,7 @@
 //Im always scared that I will click the delete level button on accident.
 //This mod adds a "failsafe" that will ask you to enter the level name to proceed to the deletion.
 
-
+//v1.0.0
 
 #include <Geode/Geode.hpp>
 #include <Geode/modify/FLAlertLayer.hpp>
@@ -33,7 +33,6 @@ class DeleteNameConfirmPopup : public Popup<FLAlertLayer*, LevelInfoLayer*> {
         auto level = m_info ? m_info->m_level : nullptr;
         std::string name = level ? level->m_levelName : "Unknown";
 
-        // Title (same as original)
         auto title = CCLabelBMFont::create("Enter Level Name", "goldFont.fnt");
         if (!title)
             title = CCLabelBMFont::create("Enter Level Name", "bigFont.fnt");
@@ -42,7 +41,7 @@ class DeleteNameConfirmPopup : public Popup<FLAlertLayer*, LevelInfoLayer*> {
         title->setPosition(size.width / 2.f, size.height - 28.f);
         m_mainLayer->addChild(title);
 
-        // Instruction text including the level name (same style as original)
+
         std::string text =
             "To delete this level, type\n"
             "its name exactly as shown:\n\"" + name + "\"";
@@ -53,11 +52,9 @@ class DeleteNameConfirmPopup : public Popup<FLAlertLayer*, LevelInfoLayer*> {
         label->setPosition(size.width / 2.f, size.height - 60.f);
         m_mainLayer->addChild(label);
 
-        // Text input
         float inputWidth = size.width - 40.f;
         m_input = TextInput::create(inputWidth, "Level name", "bigFont.fnt");
         if (!m_input) {
-            // Let caller fall back to the normal delete alert
             sSkipNextDeleteAlert = true;
             return false;
         }
@@ -66,7 +63,6 @@ class DeleteNameConfirmPopup : public Popup<FLAlertLayer*, LevelInfoLayer*> {
         m_input->setPosition(size.width / 2.f, size.height / 2.f);
         m_mainLayer->addChild(m_input);
 
-        // Single DELETE button (Cancel removed)
         auto deleteSpr = ButtonSprite::create("DELETE");
         auto deleteBtn = CCMenuItemSpriteExtra::create(
             deleteSpr, this, menu_selector(DeleteNameConfirmPopup::onOK)
@@ -88,7 +84,6 @@ class DeleteNameConfirmPopup : public Popup<FLAlertLayer*, LevelInfoLayer*> {
             return;
         }
         if (!m_info || !m_info->m_level || !m_input) {
-            // Something went wrong; just clean up
             m_alert->release();
             m_alert = nullptr;
             removeFromParent();
@@ -99,10 +94,8 @@ class DeleteNameConfirmPopup : public Popup<FLAlertLayer*, LevelInfoLayer*> {
         std::string correct = m_info->m_level->m_levelName;
 
         if (typed == correct) {
-            // Skip the next delete confirmation
             sSkipNextDeleteAlert = true;
 
-            // Match the retain() from DeleteLockAlert::show
             auto alert = m_alert;
             m_alert = nullptr;
 
@@ -119,7 +112,6 @@ class DeleteNameConfirmPopup : public Popup<FLAlertLayer*, LevelInfoLayer*> {
         }
     }
 
-    // Closing with the X / ESC should act like cancel, and release the retained alert
     void onClose(CCObject* sender) override {
         if (m_alert) {
             m_alert->release();
@@ -131,7 +123,7 @@ class DeleteNameConfirmPopup : public Popup<FLAlertLayer*, LevelInfoLayer*> {
 public:
     static DeleteNameConfirmPopup* create(FLAlertLayer* alert, LevelInfoLayer* info) {
         auto p = new DeleteNameConfirmPopup();
-        if (p && p->initAnchored(280.f, 190.f, alert, info)) { // original size
+        if (p && p->initAnchored(280.f, 190.f, alert, info)) {
             p->autorelease();
             return p;
         }
