@@ -1,0 +1,18 @@
+{
+  "geode": "5.0.0-beta.3",
+  "gd": {
+    "win": "2.2081",
+    "android": "2.2081",
+    "mac": "2.2081",
+    "ios": "2.2081"
+  },
+
+
+  "id": "polik.delete_lock",
+  "name": "Delete Lock",
+  "version": "v1.0.2",
+  "developer": "Polik",
+  "description": "",
+  "tags": ["utility", "enhancement"],
+  "links": {"source": "https://github.com/PolikVirus/Delete-Lock"}
+}
