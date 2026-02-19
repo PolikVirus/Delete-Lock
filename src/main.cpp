@@ -3,7 +3,7 @@
 //Im always scared that I will click the delete level button on accident.
 //This mod adds a "failsafe" that will ask you to enter the level name to proceed to the deletion.
 
-//v1.0.1
+//v1.0.2
 
 #include <Geode/Geode.hpp>
 #include <Geode/modify/FLAlertLayer.hpp>
